@@ -7,7 +7,7 @@ import 'package:meta/meta.dart' show required;
 class UrlLauncherIos {
   static const MethodChannel _channel = const MethodChannel('url_launcher_ios');
 
-  Future<bool> canLaunch(String url) async {
+  static Future<bool> canLaunch(String url) async {
     if (url == null) {
       return false;
     }
@@ -17,11 +17,11 @@ class UrlLauncherIos {
     );
   }
 
-  Future<void> closeWebView() async {
+  static Future<void> closeWebView() async {
     return await _channel.invokeMethod<void>('closeWebView');
   }
 
-  Future<bool> launch(
+  static Future<bool> launch(
     String urlString, {
     bool forceSafariVC,
     bool forceWebView,
