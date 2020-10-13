@@ -1,6 +1,6 @@
 # url_launcher_ios
 
-A new flutter plugin project.
+Flutter plugin that supports opening URL on external browser
 
 ## Getting Started
 

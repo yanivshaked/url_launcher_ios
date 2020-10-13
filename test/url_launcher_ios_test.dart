@@ -9,7 +9,7 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      return true;
     });
   });
 
@@ -18,6 +18,6 @@ void main() {
   });
 
   test('launch', () async {
-    //expect(await UrlLauncherIos.platformVersion, '42');
+    expect(await UrlLauncherIos.launch("http://www.cnn.com"), true);
   });
 }

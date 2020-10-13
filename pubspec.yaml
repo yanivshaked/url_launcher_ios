@@ -1,6 +1,6 @@
 name: url_launcher_ios
-description: A new flutter plugin project.
-version: 0.0.1
+description: Flutter plugin that supports opening URL on external browser
+version: 0.0.2
 author:
 homepage:
 

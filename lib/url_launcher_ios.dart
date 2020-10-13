@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:meta/meta.dart' show required;
 
 class UrlLauncherIos {
   static const MethodChannel _channel = const MethodChannel('url_launcher_ios');
