@@ -28,7 +28,7 @@ flutter:
   plugin:
     platforms:
       ios:
-        pluginClass: FLTURLLauncherPlugin
+        pluginClass: UrlLauncherIosPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
