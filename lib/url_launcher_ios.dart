@@ -6,10 +6,7 @@ import 'package:flutter/widgets.dart';
 class UrlLauncherIos {
   static const MethodChannel _channel = const MethodChannel('url_launcher_ios');
 
-  static Future<bool> canLaunch(String url) async {
-    if (url == null) {
-      return false;
-    }
+  static Future<bool?> canLaunch(String url) async {
     return await _channel.invokeMethod<bool>(
       'canLaunch',
       <String, Object>{'url': url},
@@ -20,18 +17,17 @@ class UrlLauncherIos {
     return await _channel.invokeMethod<void>('closeWebView');
   }
 
-  static Future<bool> launch(
+  static Future<bool?> launch(
     String urlString, {
-    bool forceSafariVC,
-    bool forceWebView,
-    bool enableJavaScript,
-    bool enableDomStorage,
-    bool universalLinksOnly,
-    Map<String, String> headers,
-    Brightness statusBarBrightness,
-    String webOnlyWindowName,
+    bool? forceSafariVC,
+    bool? forceWebView,
+    bool? enableJavaScript,
+    bool? enableDomStorage,
+    bool? universalLinksOnly,
+    Map<String, String>? headers,
+    Brightness? statusBarBrightness,
+    String? webOnlyWindowName,
   }) async {
-    assert(urlString != null);
     final Uri url = Uri.parse(urlString.trimLeft());
     final bool isWebURL = url.scheme == 'http' || url.scheme == 'https';
     if ((forceSafariVC == true || forceWebView == true) && !isWebURL) {
@@ -44,12 +40,12 @@ class UrlLauncherIos {
     /// [true] so that ui is automatically computed if [statusBarBrightness] is set.
     bool previousAutomaticSystemUiAdjustment = true;
     if (statusBarBrightness != null) {
-      previousAutomaticSystemUiAdjustment = WidgetsBinding.instance.renderView.automaticSystemUiAdjustment;
-      WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = false;
+      previousAutomaticSystemUiAdjustment = WidgetsBinding.instance!.renderView.automaticSystemUiAdjustment;
+      WidgetsBinding.instance!.renderView.automaticSystemUiAdjustment = false;
       SystemChrome.setSystemUIOverlayStyle(
           statusBarBrightness == Brightness.light ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light);
     }
-    final bool result = await _channel.invokeMethod<bool>(
+    final bool? result = await _channel.invokeMethod<bool>(
       'launch',
       <String, Object>{
         'url': urlString,
@@ -62,9 +58,8 @@ class UrlLauncherIos {
       },
     );
 
-    assert(previousAutomaticSystemUiAdjustment != null);
     if (statusBarBrightness != null) {
-      WidgetsBinding.instance.renderView.automaticSystemUiAdjustment = previousAutomaticSystemUiAdjustment;
+      WidgetsBinding.instance!.renderView.automaticSystemUiAdjustment = previousAutomaticSystemUiAdjustment;
     }
 
     return result;
